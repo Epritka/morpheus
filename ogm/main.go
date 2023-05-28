@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/Epritka/morpheus/v2/config"
-	"github.com/Epritka/morpheus/v2/ogm/internal/session"
+	"github.com/Epritka/morpheus/v2/ogm/internal/executer"
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 )
 
@@ -31,10 +31,10 @@ func Connect(config *config.Config, configurers ...func(c *neo4j.Config)) (*Driv
 	}, nil
 }
 
-func (ogm *Driver) NewSession() *session.Session {
-	return session.New(ogm.Driver.NewSession(context.Background(), neo4j.SessionConfig{}))
+func (ogm *Driver) NewExecuter() *executer.Executer {
+	return executer.New(ogm.Driver.NewSession(context.Background(), neo4j.SessionConfig{}))
 }
 
-func (ogm *Driver) NewSessionWithContext(ctx context.Context) *session.Session {
-	return session.New(ogm.Driver.NewSession(ctx, neo4j.SessionConfig{}))
+func (ogm *Driver) NewExecuterWithContext(ctx context.Context) *executer.Executer {
+	return executer.New(ogm.Driver.NewSession(ctx, neo4j.SessionConfig{}))
 }

@@ -7,7 +7,7 @@ import (
 
 type Builder interface {
 	Create(entities ...entity.Entity) Builder
-	String() string
+	Build() string
 }
 
 type ClauseI interface {
@@ -32,7 +32,7 @@ func (b *builder) Create(entities ...entity.Entity) Builder {
 	return b.append(clause.Create(entities...))
 }
 
-func (b *builder) String() string {
+func (b *builder) Build() string {
 	query := ""
 	if b.empty() {
 		return query

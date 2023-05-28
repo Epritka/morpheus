@@ -1,33 +1,11 @@
-package transaction
+package executer
 
 import (
 	"context"
-
-	"github.com/Epritka/morpheus/v2/ogm/internal/cypher"
-	"github.com/Epritka/morpheus/v2/ogm/internal/executer"
-	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 )
 
 type Transaction struct {
-	*executer.Executer
-	tx neo4j.ExplicitTransaction
-}
-
-func Begin(
-	ctx context.Context,
-	session neo4j.SessionWithContext,
-	cypher *cypher.Cypher,
-) (*Transaction, error) {
-	tx, err := session.BeginTransaction(ctx)
-	if err != nil {
-		session.Close(ctx)
-		return nil, err
-	}
-
-	return &Transaction{
-		Executer: executer.NewWithTx(tx, cypher),
-		tx:       tx,
-	}, nil
+	*Executer
 }
 
 func (t *Transaction) Commit() error {

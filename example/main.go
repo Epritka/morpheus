@@ -24,12 +24,14 @@ func CreateActor() error {
 		return err
 	}
 
-	session := ogm.NewSession()
+	query := "CREATE (a:actor {name: 'test'})"
+	executer := ogm.NewExecuter()
+	tx, err := executer.Begin()
 
-	err = session.DoQuery("CREATE (a:actor {name: 'name'})")
+	err = tx.DoQuery(query)
 	if err != nil {
 		return err
 	}
 
-	return nil
+	return tx.Commit()
 }
