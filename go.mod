@@ -1,4 +1,4 @@
-module github.com/Epritka/morpheus
+module github.com/Epritka/morpheus/v1
 
 go 1.19
 

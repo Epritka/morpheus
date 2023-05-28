@@ -1,8 +1,8 @@
 package builder
 
 import (
-	"github.com/Epritka/morpheus/builder/clause"
-	"github.com/Epritka/morpheus/builder/entity"
+	"github.com/Epritka/morpheus/v1/builder/clause"
+	"github.com/Epritka/morpheus/v1/builder/entity"
 )
 
 type Builder interface {

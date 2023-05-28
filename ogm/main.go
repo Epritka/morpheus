@@ -3,8 +3,8 @@ package ogm
 import (
 	"context"
 
-	"github.com/Epritka/morpheus/config"
-	"github.com/Epritka/morpheus/ogm/internal/session"
+	"github.com/Epritka/morpheus/v1/config"
+	"github.com/Epritka/morpheus/v1/ogm/internal/session"
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 )
 

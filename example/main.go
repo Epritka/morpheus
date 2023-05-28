@@ -3,8 +3,8 @@ package example
 import (
 	"fmt"
 
-	"github.com/Epritka/morpheus/config"
-	"github.com/Epritka/morpheus/ogm"
+	"github.com/Epritka/morpheus/v1/config"
+	"github.com/Epritka/morpheus/v1/ogm"
 )
 
 func CreateActor() error {
