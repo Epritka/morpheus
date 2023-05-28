@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/Epritka/morpheus/v1/builder/entity"
+	"github.com/Epritka/morpheus/v2/builder/entity"
 )
 
 type create struct {

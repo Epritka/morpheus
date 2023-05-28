@@ -1,8 +1,8 @@
 package cypher
 
 import (
-	"github.com/Epritka/morpheus/v1/builder"
-	"github.com/Epritka/morpheus/v1/builder/entity"
+	"github.com/Epritka/morpheus/v2/builder"
+	"github.com/Epritka/morpheus/v2/builder/entity"
 )
 
 type Cypher struct {

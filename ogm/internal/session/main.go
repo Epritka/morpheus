@@ -3,9 +3,9 @@ package session
 import (
 	"context"
 
-	"github.com/Epritka/morpheus/v1/ogm/internal/cypher"
-	"github.com/Epritka/morpheus/v1/ogm/internal/executer"
-	"github.com/Epritka/morpheus/v1/ogm/internal/transaction"
+	"github.com/Epritka/morpheus/v2/ogm/internal/cypher"
+	"github.com/Epritka/morpheus/v2/ogm/internal/executer"
+	"github.com/Epritka/morpheus/v2/ogm/internal/transaction"
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 )
 

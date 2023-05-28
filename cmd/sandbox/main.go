@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/Epritka/morpheus/v1/example"
+	"github.com/Epritka/morpheus/v2/example"
 )
 
 func main() {

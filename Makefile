@@ -1,6 +1,6 @@
 .PHONY: sandbox
 sandbox:
-	go run ./sandbox/main.go
+	go run ./cmd/sandbox/main.go
 
 .PHONY: test
 test:
