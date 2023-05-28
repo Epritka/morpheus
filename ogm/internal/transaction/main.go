@@ -1,21 +1,33 @@
-package example
+package transaction
 
 import (
 	"context"
 
+	"github.com/Epritka/morpheus/ogm/internal/cypher"
+	"github.com/Epritka/morpheus/ogm/internal/executer"
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 )
 
 type Transaction struct {
+	*executer.Executer
 	tx neo4j.ExplicitTransaction
 }
 
-func (db *DB) Begin() (*Transaction, error) {
-	return db.begin(context.Background())
-}
+func Begin(
+	ctx context.Context,
+	session neo4j.SessionWithContext,
+	cypher *cypher.Cypher,
+) (*Transaction, error) {
+	tx, err := session.BeginTransaction(ctx)
+	if err != nil {
+		session.Close(ctx)
+		return nil, err
+	}
 
-func (db *DB) BeginWithContext(ctx context.Context) (*Transaction, error) {
-	return db.begin(ctx)
+	return &Transaction{
+		Executer: executer.NewWithTx(tx, cypher),
+		tx:       tx,
+	}, nil
 }
 
 func (t *Transaction) Commit() error {
@@ -40,20 +52,6 @@ func (t *Transaction) Close() error {
 
 func (t *Transaction) CloseWithContext(ctx context.Context) error {
 	return t.close(ctx)
-}
-
-func (db *DB) begin(ctx context.Context) (*Transaction, error) {
-	session := db.Driver.NewSession(ctx, neo4j.SessionConfig{})
-	tx, err := session.BeginTransaction(ctx)
-	if err != nil {
-		tx.Close(ctx)
-		return nil, err
-	}
-
-	db.tx = tx
-	return &Transaction{
-		tx: tx,
-	}, nil
 }
 
 func (t *Transaction) commit(ctx context.Context) error {

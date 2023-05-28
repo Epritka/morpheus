@@ -1,7 +1,7 @@
 package entity
 
 import (
-	"encoding/json"
+	"fmt"
 	"strings"
 )
 
@@ -15,9 +15,17 @@ func (b *Base) String() string {
 	result := b.Alias
 	properties := ""
 
-	if len(b.Properties) > 0 {
-		bytes, _ := json.Marshal(b.Properties)
-		properties = string(bytes)
+	i, count := 0, len(b.Properties)
+	for k, v := range b.Properties {
+		properties += fmt.Sprintf("%s: %#v", k, v)
+		if i < count-1 {
+			properties += ","
+		}
+		i++
+	}
+
+	if count != 0 {
+		properties = fmt.Sprintf("{ %s }", properties)
 	}
 
 	if len(b.Labels) > 0 {

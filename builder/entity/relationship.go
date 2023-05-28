@@ -5,7 +5,7 @@ import "fmt"
 type AnyRelationship struct{}
 
 type Relationship struct {
-	Base
+	*Base
 }
 
 func (rs *Relationship) String() string {

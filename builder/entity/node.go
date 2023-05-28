@@ -3,7 +3,7 @@ package entity
 import "fmt"
 
 type Node struct {
-	Base
+	*Base
 }
 
 func (n *Node) String() string {
