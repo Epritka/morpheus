@@ -7,7 +7,7 @@ import (
 	"github.com/Epritka/morpheus/ogm"
 )
 
-func Create() error {
+func CreateActor() error {
 	host := "localhost"
 	port := 7687
 	username := "neo4j"
@@ -26,18 +26,10 @@ func Create() error {
 
 	session := ogm.NewSession()
 
-	session.Save(map[string]any{})
-	// tx, err := session.Begin()
-	// if err != nil {
-	// 	return err
-	// }
-
-	// query := "CREATE (a:actor {name: 'name'})"
-	err = session.Do()
+	err = session.DoQuery("CREATE (a:actor {name: 'name'})")
 	if err != nil {
 		return err
 	}
 
-	// return tx.Commit()
 	return nil
 }

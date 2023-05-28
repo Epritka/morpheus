@@ -41,11 +41,28 @@ func (s *Session) DoWithContext(ctx context.Context) error {
 	return s.do(ctx)
 }
 
+func (s *Session) DoQuery(cypher string) error {
+	return s.doQuery(context.Background(), cypher)
+}
+
+func (s *Session) DoQueryWithContext(ctx context.Context, cypher string) error {
+	return s.doQuery(ctx, cypher)
+}
+
 func (s *Session) do(ctx context.Context) error {
 	executer, err := executer.New(s.session, s.Cypher)
 	if err != nil {
 		return err
 	}
 
-	return executer.DoWithContext(ctx)
+	return s.doQuery(ctx, executer.String())
+}
+
+func (s *Session) doQuery(ctx context.Context, cypher string) error {
+	executer, err := executer.New(s.session, s.Cypher)
+	if err != nil {
+		return err
+	}
+
+	return executer.DoQueryWithContext(ctx, cypher)
 }

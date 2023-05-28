@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	fmt.Println(example.Create())
+	fmt.Println(example.CreateActor())
 }

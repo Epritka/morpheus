@@ -42,9 +42,21 @@ func (b *Executer) DoWithContext(ctx context.Context) error {
 	return b.do(ctx)
 }
 
-func (b *Executer) do(ctx context.Context) error {
+func (b *Executer) DoQuery(cypher string) error {
+	return b.doQuery(context.Background(), cypher)
+}
+
+func (b *Executer) DoQueryWithContext(ctx context.Context, cypher string) error {
+	return b.doQuery(ctx, cypher)
+}
+
+func (e *Executer) do(ctx context.Context) error {
+	return e.doQuery(ctx, e.String())
+}
+
+func (b *Executer) doQuery(ctx context.Context, cypher string) error {
 	err := func() error {
-		result, err := b.tx.Run(ctx, b.Cypher.String(), map[string]any{})
+		result, err := b.tx.Run(ctx, cypher, map[string]any{})
 		if err != nil {
 			return err
 		}
