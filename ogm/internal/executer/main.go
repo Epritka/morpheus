@@ -3,26 +3,26 @@ package executer
 import (
 	"context"
 
-	"github.com/Epritka/morpheus/v2/ogm/internal/cypher"
-	"github.com/Epritka/morpheus/v2/ogm/types"
+	"github.com/Epritka/morpheus/v2/builder"
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 )
 
 type Executer struct {
-	types.Cypher
+	builder.Builder
+	*Cypher
 
-	cypher     *cypher.Cypher
 	session    neo4j.SessionWithContext
 	tx         neo4j.ExplicitTransaction
 	autoCommit bool
 }
 
 func New(session neo4j.SessionWithContext) *Executer {
-	cypher := cypher.New()
-
+	builder := builder.NewBuilder()
 	return &Executer{
-		Cypher:     cypher,
-		cypher:     cypher,
+		Builder: builder,
+		Cypher: &Cypher{
+			builder: builder,
+		},
 		session:    session,
 		autoCommit: false,
 	}

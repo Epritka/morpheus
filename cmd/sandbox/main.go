@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	// fmt.Println(example.CreateActor())
-	fmt.Println(example.CreatePerson())
+	fmt.Println(example.CreateActor())
+	// fmt.Println(example.CreatePerson())
 }

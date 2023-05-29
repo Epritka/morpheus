@@ -1,6 +1,8 @@
 package types
 
 type Entity interface {
+	SetId(id int64)
+	SetLabels(labels []string)
 	isEntity() bool
 }
 
@@ -21,6 +23,6 @@ func (b *BaseEntity) SetLabels(labels []string) {
 	b.Labels = labels
 }
 
-func (b *BaseEntity) isModel() bool {
+func (b *BaseEntity) isEntity() bool {
 	return true
 }

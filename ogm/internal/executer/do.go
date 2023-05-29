@@ -19,7 +19,7 @@ func (e *Executer) DoQueryWithContext(ctx context.Context, cypher string) error 
 }
 
 func (e *Executer) do(ctx context.Context) error {
-	return e.doQuery(ctx, e.cypher.Build())
+	return e.doQuery(ctx, e.Build())
 }
 
 func (e *Executer) doQuery(ctx context.Context, cypher string) error {

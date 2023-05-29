@@ -24,14 +24,34 @@ func CreateActor() error {
 		return err
 	}
 
+	// p := &Person{
+	// 	PersonSchema: &PersonSchema{
+	// 		Node: types.NewNode(),
+	// 		Name: "Keanu Reeves",
+	// 		Job:  "actor",
+	// 	},
+	// 	Movies: []Movie{
+	// 		{
+	// 			MovieSchema: &MovieSchema{
+	// 				Node:     types.NewNode(),
+	// 				Title:    "The Matrix",
+	// 				Released: 1999,
+	// 			},
+	// 		},
+	// 	},
+	// }
+
 	query := "CREATE (a:actor {name: 'test'})"
 	executer := ogm.NewExecuter()
 	tx, err := executer.Begin()
-
+	// executer.
+	// executer.DoQuery(query)
+	// tx.Cypher.Create(p)
 	err = tx.DoQuery(query)
 	if err != nil {
 		return err
 	}
 
 	return tx.Commit()
+	return nil
 }
