@@ -1,15 +1,15 @@
 package example
 
 type Person struct {
-	*PersonSchema
+	*PersonSchema `label:"person"`
 
-	Movies []Movie `rel:"acted_in" direction:"incoming"`
+	Movies []MovieSchema `rel:"acted_in" direction:"incoming"`
 }
 
 type Movie struct {
 	*MovieSchema
 
-	Cast []Person `rel:"acted_in" direction:"outgoing"`
+	Cast []PersonSchema `rel:"acted_in" direction:"outgoing"`
 }
 
 type ActedIn struct {

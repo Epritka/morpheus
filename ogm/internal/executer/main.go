@@ -3,13 +3,13 @@ package executer
 import (
 	"context"
 
-	"github.com/Epritka/morpheus/v2/builder"
+	"github.com/Epritka/morpheus/builder"
+	"github.com/Epritka/morpheus/builder/entity"
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 )
 
 type Executer struct {
-	builder.Builder
-	*Cypher
+	entity.Builder
 
 	session    neo4j.SessionWithContext
 	tx         neo4j.ExplicitTransaction
@@ -19,10 +19,7 @@ type Executer struct {
 func New(session neo4j.SessionWithContext) *Executer {
 	builder := builder.NewBuilder()
 	return &Executer{
-		Builder: builder,
-		Cypher: &Cypher{
-			builder: builder,
-		},
+		Builder:    builder,
 		session:    session,
 		autoCommit: false,
 	}

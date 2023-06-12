@@ -11,8 +11,7 @@ package types
 // }
 
 // type Result interface {
-// 	// Model() Model
-
+// 	// Model()
 // 	// Return() Model
 // 	// Load(...Entity) error
 // }

@@ -3,22 +3,23 @@ package clause
 import (
 	"fmt"
 	"strings"
+
+	"github.com/Epritka/morpheus/builder/entity"
 )
 
 type returnClause struct {
-	limit    string
-	entities []string
+	properties []string
 }
 
-func Return(entities []string) *returnClause {
-	return &returnClause{entities: entities}
-}
+func Return(properties ...entity.Property) *returnClause {
+	props := []string{}
+	for _, p := range properties {
+		props = append(props, p.String())
+	}
 
-func (r *returnClause) Limit(number int) *returnClause {
-	r.limit = fmt.Sprintf(" LIMIT %d", number)
-	return r
+	return &returnClause{properties: props}
 }
 
 func (r *returnClause) String() string {
-	return fmt.Sprintf("RETURN %s%s", strings.Join(r.entities, ", "), r.limit)
+	return fmt.Sprintf("RETURN %s", strings.Join(r.properties, ", "))
 }

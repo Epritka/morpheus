@@ -3,8 +3,9 @@ package example
 import (
 	"fmt"
 
-	"github.com/Epritka/morpheus/v2/config"
-	"github.com/Epritka/morpheus/v2/ogm"
+	"github.com/Epritka/morpheus/config"
+	"github.com/Epritka/morpheus/ogm"
+	"github.com/Epritka/morpheus/ogm/types"
 )
 
 func CreateActor() error {
@@ -24,34 +25,32 @@ func CreateActor() error {
 		return err
 	}
 
-	// p := &Person{
-	// 	PersonSchema: &PersonSchema{
-	// 		Node: types.NewNode(),
-	// 		Name: "Keanu Reeves",
-	// 		Job:  "actor",
-	// 	},
-	// 	Movies: []Movie{
-	// 		{
-	// 			MovieSchema: &MovieSchema{
-	// 				Node:     types.NewNode(),
-	// 				Title:    "The Matrix",
-	// 				Released: 1999,
-	// 			},
-	// 		},
-	// 	},
-	// }
+	p := &Person{
+		PersonSchema: &PersonSchema{
+			Node: types.NewNode(),
+			Name: "Keanu Reeves",
+			Job:  "actor",
+		},
+		Movies: []MovieSchema{
+			{
+				Node:     types.NewNode(),
+				Title:    "The Matrix",
+				Released: 1999,
+			},
+		},
+	}
 
-	query := "CREATE (a:actor {name: 'test'})"
+	// query := "CREATE (a:actor {name: 'test'})"
 	executer := ogm.NewExecuter()
-	tx, err := executer.Begin()
+	// tx, err := executer.Begin()
 	// executer.
 	// executer.DoQuery(query)
 	// tx.Cypher.Create(p)
-	err = tx.DoQuery(query)
+	err = executer.Save(p)
 	if err != nil {
 		return err
 	}
 
-	return tx.Commit()
+	// return tx.Commit()
 	return nil
 }

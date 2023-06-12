@@ -1,5 +1,5 @@
-module github.com/Epritka/morpheus/v2
+module github.com/Epritka/morpheus
 
-go 1.19
+go 1.20
 
 require github.com/neo4j/neo4j-go-driver/v5 v5.9.0

@@ -1,6 +1,6 @@
 package example
 
-import "github.com/Epritka/morpheus/v2/ogm/types"
+import "github.com/Epritka/morpheus/ogm/types"
 
 type PersonSchema struct {
 	*types.Node
