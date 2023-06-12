@@ -5,7 +5,6 @@ import (
 
 	"github.com/Epritka/morpheus/config"
 	"github.com/Epritka/morpheus/ogm"
-	"github.com/Epritka/morpheus/ogm/types"
 )
 
 func CreateActor() error {
@@ -25,32 +24,12 @@ func CreateActor() error {
 		return err
 	}
 
-	p := &Person{
-		PersonSchema: &PersonSchema{
-			Node: types.NewNode(),
-			Name: "Keanu Reeves",
-			Job:  "actor",
-		},
-		Movies: []MovieSchema{
-			{
-				Node:     types.NewNode(),
-				Title:    "The Matrix",
-				Released: 1999,
-			},
-		},
-	}
-
-	// query := "CREATE (a:actor {name: 'test'})"
+	query := "CREATE (a:actor {name: 'test'})"
 	executer := ogm.NewExecuter()
-	// tx, err := executer.Begin()
-	// executer.
-	// executer.DoQuery(query)
-	// tx.Cypher.Create(p)
-	err = executer.Save(p)
+	_, err = executer.DoQuery(query)
 	if err != nil {
 		return err
 	}
 
-	// return tx.Commit()
 	return nil
 }
