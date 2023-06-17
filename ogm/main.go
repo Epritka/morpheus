@@ -31,10 +31,10 @@ func Connect(config *config.Config, configurers ...func(c *neo4j.Config)) (*Driv
 	}, nil
 }
 
-func (ogm *Driver) NewExecuter() *executer.Executer {
-	return executer.New(ogm.Driver.NewSession(context.Background(), neo4j.SessionConfig{}))
+func (driver *Driver) NewExecuter() *executer.Executer {
+	return executer.New(driver.Driver.NewSession(context.Background(), neo4j.SessionConfig{}))
 }
 
-func (ogm *Driver) NewExecuterWithContext(ctx context.Context) *executer.Executer {
-	return executer.New(ogm.Driver.NewSession(ctx, neo4j.SessionConfig{}))
+func (driver *Driver) NewExecuterWithContext(ctx context.Context) *executer.Executer {
+	return executer.New(driver.Driver.NewSession(ctx, neo4j.SessionConfig{}))
 }

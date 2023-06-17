@@ -13,7 +13,7 @@ type merge struct {
 	onMatch  []string
 }
 
-type Set struct {
+type mergeSet struct {
 	key   string
 	value any
 }
@@ -27,12 +27,12 @@ func Merge(entities ...entity.Entity) *merge {
 }
 
 func (m *merge) OnMatchSet(key string, value any) entity.Merge {
-	m.onMatch = append(m.onMatch, set(key, value))
+	m.onMatch = append(m.onMatch, m.set(key, value))
 	return m
 }
 
 func (m *merge) OnCreateSet(key string, value any) entity.Merge {
-	m.onCreate = append(m.onCreate, set(key, value))
+	m.onCreate = append(m.onCreate, m.set(key, value))
 	return m
 }
 
@@ -50,6 +50,6 @@ func (m *merge) String() string {
 	return body
 }
 
-func set(key string, value any) string {
+func (m *merge) set(key string, value any) string {
 	return fmt.Sprintf("\t\t%s = %v", key, value)
 }

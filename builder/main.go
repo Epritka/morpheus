@@ -6,13 +6,13 @@ import (
 )
 
 type builder struct {
-	firstClause *Clause
-	lastClause  *Clause
+	firstClause *сlause
+	lastClause  *сlause
 }
 
-type Clause struct {
+type сlause struct {
 	entity.Clause
-	Next *Clause
+	Next *сlause
 }
 
 func NewBuilder() entity.Builder {
@@ -20,7 +20,7 @@ func NewBuilder() entity.Builder {
 }
 
 func (b *builder) Append(clauseI entity.Clause) entity.Builder {
-	clause := &Clause{Clause: clauseI, Next: nil}
+	clause := &сlause{Clause: clauseI, Next: nil}
 
 	if b.empty() {
 		b.firstClause = clause
@@ -47,6 +47,10 @@ func (b *builder) Match(entities ...entity.Entity) entity.Builder {
 
 func (b *builder) OptionalMatch(entities ...entity.Entity) entity.Builder {
 	return b.Append(clause.OptionalMatch(entities...))
+}
+
+func (b *builder) Set(setter string) entity.Builder {
+	return b.Append(clause.Set(setter))
 }
 
 func (b *builder) Merge(entities ...entity.Entity) entity.Merge {

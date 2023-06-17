@@ -7,6 +7,9 @@ import (
 )
 
 func main() {
-	fmt.Println(example.CreateActor())
+	fmt.Println()
+	err := example.Test()
+	fmt.Println(err)
+	fmt.Println()
 	// fmt.Println(example.CreatePerson())
 }
