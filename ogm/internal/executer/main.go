@@ -2,14 +2,11 @@ package executer
 
 import (
 	"context"
-	"log"
 
 	"github.com/Epritka/morpheus/builder"
 	"github.com/Epritka/morpheus/builder/entity"
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 )
-
-var logger = log.Default()
 
 type Executer struct {
 	entity.Builder
@@ -45,7 +42,6 @@ func (e *Executer) CloseWithContext(ctx context.Context) error {
 }
 
 func (e *Executer) begin(ctx context.Context) (*Transaction, error) {
-	logger.Print("transaction begining")
 	tx, err := e.session.BeginTransaction(ctx)
 	if err != nil {
 		return nil, err
