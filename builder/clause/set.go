@@ -1,10 +1,17 @@
 package clause
 
-// type set struct {
-// 	properties map[string]any
-// }
+import (
+	"fmt"
+)
 
-// func (s *set) String() string {
-// 	props :=
-// 	return fmt.Sprintf("SET %s", strings.Join(s.properties, ", "))
-// }
+type set struct {
+	setter string
+}
+
+func Set(setter string) *set {
+	return &set{setter: setter}
+}
+
+func (s *set) String() string {
+	return fmt.Sprintf("SET %s", s.setter)
+}

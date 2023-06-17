@@ -9,6 +9,8 @@ type Builder interface {
 	Match(...Entity) Builder
 	OptionalMatch(...Entity) Builder
 
+	Set(string) Builder
+
 	Merge(entities ...Entity) Merge
 
 	Call(Function) Builder

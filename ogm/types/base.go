@@ -1,22 +1,36 @@
 package types
 
 type Entity interface {
-	SetId(id int64)
-	isEntity() bool
+	Type() string
+	Labels() []string
+	SetElementId(elementId string)
+	GetElementId() string
+	SetId(int64)
+	GetId() int64
+	Properies() map[string]any
 }
 
 type BaseEntity struct {
-	ID *int64 `ogm:"id"`
+	Id        int64
+	ElementId string
 }
 
 func new() *BaseEntity {
 	return &BaseEntity{}
 }
 
-func (b *BaseEntity) SetId(id int64) {
-	b.ID = &id
+func (b *BaseEntity) SetElementId(elementId string) {
+	b.ElementId = elementId
 }
 
-func (b *BaseEntity) isEntity() bool {
-	return true
+func (b *BaseEntity) GetElementId() string {
+	return b.ElementId
+}
+
+func (b *BaseEntity) SetId(id int64) {
+	b.Id = id
+}
+
+func (b *BaseEntity) GetId() int64 {
+	return b.Id
 }
