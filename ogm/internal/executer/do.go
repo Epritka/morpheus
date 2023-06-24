@@ -55,7 +55,6 @@ func (e *Executer) do(ctx context.Context, cypher string, resultParser func(neo4
 			if err != nil {
 				return nil, err
 			}
-			logger.Print("transaction begining")
 
 			e.tx = tx
 			e.autoCommit = true
@@ -69,8 +68,6 @@ func (e *Executer) do(ctx context.Context, cypher string, resultParser func(neo4
 		if result.Err() != nil {
 			return nil, result.Err()
 		}
-
-		logger.Printf("executed query: %#v", cypher)
 
 		return result, nil
 	}()
@@ -92,7 +89,6 @@ func (e *Executer) do(ctx context.Context, cypher string, resultParser func(neo4
 				return err
 			}
 		}
-		logger.Print("transaction commited")
 		return nil
 	}
 
@@ -101,7 +97,6 @@ func (e *Executer) do(ctx context.Context, cypher string, resultParser func(neo4
 		if err != nil {
 			return err
 		}
-		logger.Print("transaction rollbacked")
 	}
 
 	return nil

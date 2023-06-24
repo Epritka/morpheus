@@ -33,12 +33,10 @@ func (t *Transaction) CloseWithContext(ctx context.Context) error {
 }
 
 func (t *Transaction) commit(ctx context.Context) error {
-	logger.Print("transaction commited")
 	return t.tx.Commit(ctx)
 }
 
 func (t *Transaction) rollback(ctx context.Context) error {
-	logger.Print("transaction rollbacked")
 	return t.tx.Rollback(ctx)
 }
 
