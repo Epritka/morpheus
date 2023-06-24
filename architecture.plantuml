@@ -1,0 +1,106 @@
+@startuml architecture
+
+together {
+    component "Neo4j Database Toolkit" as toolkit {
+        package neo4j <<Database>> {
+            interface DriverWithContext
+            interface SessionWithContext
+            interface ExplicitTransaction
+            class Record
+        }
+
+        package "morpheus" {
+            package "ogm" {
+                package "internal" {
+                    package "executer" {
+                        Executer --> Transaction
+                        Transaction *-- Executer
+                        Executer o-- SessionWithContext
+                        Executer o-- ExplicitTransaction
+                        Executer --> Record
+                        class Executer
+                        class Transaction
+                    }
+                }
+                package "types" {
+                    Model o-- Record
+                    interface Model
+                    class BaseModel
+                    NodeModel *-- BaseModel
+                    NodeModel <|.. Model
+                    class NodeModel
+                    RelationshipModel *-- BaseModel
+                    RelationshipModel <|.. Model
+                    class RelationshipModel
+                }
+                Driver --> Executer
+                Driver o-- DriverWithContext
+                class Driver
+            }
+
+            package "builder" {
+                package "clause" {
+                    Call <|.. Clause
+                    class Call
+                    Create <|.. Clause
+                    class Create
+                    Match <|.. Clause
+                    class Match
+                    Set <|.. Clause
+                    class Set
+                    Merge <|.. Clause
+                    class Merge
+                    Where <|.. Clause
+                    class Where
+                    Call <|.. Clause
+                    class Call
+                    With <|.. Clause
+                    class With
+                    Delete <|.. Clause
+                    class Delete
+                    Return <|.. Clause
+                    class Return
+                    Limit <|.. Clause
+                    class Limit
+                }
+                package "entity" {
+                    Executer *-- BuilderI
+                    interface BuilderI
+                    interface Clause
+                    interface Entity
+                    interface Property
+                    class Base
+                    Node <|.. Entity
+                    class Node
+                    Relationship <|.. Entity
+                    class Relationship
+                    AnyRelationship <|.. Entity
+                    class AnyRelationship
+                    PatternList <|.. Entity
+                    class PatternList
+                    Alias <|.. Property
+                    class Alias
+                    Function <|.. Entity
+                    class Function
+                }
+                builder --> сlause
+                builder <|.. BuilderI
+                class builder
+                сlause --> Call
+                сlause --> Create
+                сlause --> Match
+                сlause --> Set
+                сlause --> Merge
+                сlause --> Where
+                сlause --> Call
+                сlause --> With
+                сlause --> Delete
+                сlause --> Return
+                сlause --> Limit
+                class сlause
+            }
+        }
+    }
+}
+
+@enduml
